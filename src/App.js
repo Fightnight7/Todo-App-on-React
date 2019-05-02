@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import classes from './App.module.css';
+import TodoItem from "./components/TodoItem/TodoItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let todoData= [
+    {
+        id: 1,
+        text: "Take out the trash",
+        completed: true
+    },
+    {
+        id: 2,
+        text: "Grocery shopping",
+        completed: false
+    },
+    {
+        id: 3,
+        text: "Clean gecko tank",
+        completed: false
+    },
+    {
+        id: 4,
+        text: "Mow lawn",
+        completed: true
+    },
+    {
+        id: 5,
+        text: "Make dinner",
+        completed: false
+    }
+];
+
+class App extends Component{
+    constructor(){
+        super();
+        this.state = {
+            toDo: todoData,
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(id) {
+        this.setState(prevState => {
+            const updatedtoDo = prevState.toDo.map(t=>{
+                debugger
+                if(t.id === id){
+                    t.completed = !t.completed
+                }
+                return t
+            });
+            return{
+                toDo: updatedtoDo
+        }})
+    };
+    render(){
+        let TodoDataMap = this.state.toDo.map(d=> {
+            return (
+                <TodoItem key={d.id} id={d.id} text={d.text} completed={d.completed} handleChange={this.handleChange}/>
+            )
+        });
+        return (
+            <div className={classes.todolist}>
+                {TodoDataMap}
+            </div>
+        )
+    }
 }
 
 export default App;

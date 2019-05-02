@@ -1,0 +1,22 @@
+.todoitem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 20px 10px 30px;
+    width: 70%;
+    border-bottom: 1px solid #cecece;
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 15px;
+    color: #333;
+}
+
+.todoitem input {
+    margin-right: 10px;
+}
+
+:checked + label{
+    text-decoration: line-through;
+    font-style: italic;
+    color: lightslategray;
+}
